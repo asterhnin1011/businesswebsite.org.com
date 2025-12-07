@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Terra Logistics — Supply Chain & Logistics Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- CSS VARIABLES ---------- */
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#00c2a8; /* teal */
+      --accent-2:#4f46e5; /* indigo */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1200px;
+      --container-pad:24px;
+      --ff: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    /* ---------- Reset ---------- */n
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff);
+      background:linear-gradient(180deg,#071029 0%, #081223 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:80px;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ---------- Layout helpers ---------- */
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--container-pad)}
+    .row{display:flex;gap:24px;align-items:center}
+    .stack{display:flex;flex-direction:column;gap:12px}
+
+    /* ---------- NAV ---------- */
+    header{position:sticky;top:12px;z-index:40}
+    .nav{backdrop-filter: blur(8px);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:20px;padding:12px;margin:0 12px}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .brand-mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:800;color:#051023}
+    .brand-title{font-weight:700}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    .btn{padding:10px 16px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#031026;font-weight:700}
+    .ghost{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
+
+    /* ---------- HERO ---------- */
+    .hero{padding:56px 0}
+    .hero-grid{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center}
+    .eyebrow{color:var(--accent);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:1px}
+    h1{font-size:38px;margin:6px 0 8px;line-height:1.05}
+    p.lead{color:var(--muted);max-width:62ch}
+    .kpis{display:flex;gap:18px;margin-top:20px}
+    .kpi{background:var(--card);padding:14px;border-radius:12px;min-width:110px;text-align:center}
+    .kpi strong{display:block;font-size:18px}
+
+    /* mock map / panel */
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .map{height:320px;border-radius:10px;background-image:linear-gradient(135deg, rgba(79,70,229,0.12), rgba(0,194,168,0.06));display:flex;flex-direction:column}
+    .map .top{display:flex;justify-content:space-between;padding:12px}
+    .map .legend{padding:12px}
+
+    /* ---------- SERVICES ---------- */
+    section.services{padding:40px 0}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .service h3{margin:8px 0 6px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);font-size:13px}
+
+    /* ---------- FEATURES & CASES ---------- */
+    .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:24px 0}
+    .feature{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* ---------- TESTIMONIALS ---------- */
+    .testimonials{padding:32px 0}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .test{background:var(--card);padding:18px;border-radius:12px}
+
+    /* ---------- CONTACT ---------- */
+    .contact{padding:40px 0}
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:24px}
+    .form input,.form textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .form label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    .submit{margin-top:12px}
+
+    /* ---------- FOOTER ---------- */
+    footer{padding:28px 0 80px;color:var(--muted)}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-card{order:2}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .test-grid{grid-template-columns:repeat(2,1fr)}
+      .features{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      h1{font-size:28px}
+      .nav-inner{flex-direction:column;align-items:flex-start}
+      nav ul{display:none}
+      .services-grid{grid-template-columns:1fr}
+      .test-grid{grid-template-columns:1fr}
+      .brand-mark{width:40px;height:40px}
+    }
+
+    /* small util */
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="nav">
+      <div class="nav-inner container">
+        <div class="logo">
+          <div class="brand-mark">T</div>
+          <div class="stack">
+            <div class="brand-title">Terra Logistics</div>
+            <div class="muted" style="font-size:12px">Supply Chain & Logistics</div>
+          </div>
+        </div>
+        <nav aria-label="Main navigation">
+          <ul>
+            <li><a class="muted" href="#services">Services</a></li>
+            <li><a class="muted" href="#features">Solutions</a></li>
+            <li><a class="muted" href="#cases">Case Studies</a></li>
+            <li><a class="muted" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a href="#contact" class="btn">Request Demo</a>
+          <a href="#" class="ghost">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Enterprise Logistics</div>
+          <h1>End-to-end supply chain visibility that scales with your business</h1>
+          <p class="lead">Terra Logistics helps enterprises design, operate and optimize resilient supply chains using real-time tracking, predictive ETAs, and automation — all wrapped in a single platform with white-glove onboarding.</p>
+
+          <div class="kpis">
+            <div class="kpi"><span class="muted">Avg lead time</span><strong>2.4 days</strong></div>
+            <div class="kpi"><span class="muted">On-time delivery</span><strong>98.7%</strong></div>
+            <div class="kpi"><span class="muted">Cost savings</span><strong>24%</strong></div>
+          </div>
+
+          <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+            <a href="#contact" class="btn">Get a Demo</a>
+            <a href="#services" class="ghost">Explore Services</a>
+          </div>
+
+          <div style="margin-top:28px;display:flex;gap:10px;align-items:center;color:var(--muted);font-size:13px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>Trusted by logistics teams across manufacturing, retail and e-commerce</div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="muted">Live Network Overview</div>
+            <div style="font-weight:700">Region: APAC</div>
+          </div>
+          <div class="map">
+            <div class="top">
+              <div class="muted">Shipments: <strong>1,248</strong></div>
+              <div class="muted">Active trucks: <strong>314</strong></div>
+            </div>
+            <div style="flex:1;display:grid;place-items:center;padding:22px">
+              <!-- placeholder svg map -->
+              <svg width="100%" height="220" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="800" height="300" rx="10" fill="transparent"/>
+                <g fill-opacity="0.9">
+                  <circle cx="120" cy="80" r="6" fill="#00c2a8" />
+                  <circle cx="300" cy="160" r="8" fill="#4f46e5" />
+                  <circle cx="540" cy="60" r="5" fill="#00c2a8" />
+                  <circle cx="700" cy="180" r="7" fill="#4f46e5" />
+                </g>
+                <path d="M120 80 C 190 60, 270 120, 300 160 C 380 220, 460 80, 540 60" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+              </svg>
+            </div>
+            <div class="legend muted">ETA prediction & risk alerts • Multimodal lanes</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <div>
+          <div class="eyebrow">What we do</div>
+          <h2 style="margin:6px 0">Comprehensive logistics services for complex supply chains</h2>
+          <div class="muted">From network design to last-mile delivery, Terra covers the full lifecycle with measurable ROI.</div>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <article class="service">
+          <div class="pill">Network Design</div>
+          <h3>Strategic warehousing & route optimization</h3>
+          <p class="muted">Simulate network changes and reduce transit time using our optimization engine.</p>
+        </article>
+
+        <article class="service">
+          <div class="pill">Visibility</div>
+          <h3>Real-time tracking & alerts</h3>
+          <p class="muted">Live ETAs, event-based alerts and harmonised shipment timelines across carriers.</p>
+        </article>
+
+        <article class="service">
+          <div class="pill">Operations</div>
+          <h3>Managed logistics & freight procurement</h3>
+          <p class="muted">Flexible capacity, negotiated rates and SLA-backed service levels for enterprise customers.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURES / CASE STUDIES -->
+    <section id="features" class="features">
+      <div class="feature">
+        <div class="eyebrow">Platform</div>
+        <h3>Unified dashboard & analytics</h3>
+        <p class="muted">Customisable dashboards with KPI widgets, cohort-level reporting and exportable analytics.</p>
+        <ul class="muted">
+          <li>Drill-down shipment timeline</li>
+          <li>Predictive ETAs using machine learning</li>
+          <li>APIs & EDI integrations</li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <div class="eyebrow">Case Study</div>
+        <h3>Consumer Electronics — APAC launch</h3>
+        <p class="muted">Reduced lead times by 32% and saved 18% on freight through lane rationalization and pooled warehousing.</p>
+        <div style="margin-top:12px">
+          <a class="ghost" href="#">Read full case</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="cases" class="testimonials">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Proof</div>
+          <h2 style="margin:6px 0">Trusted by enterprise teams</h2>
+        </div>
+      </div>
+
+      <div class="test-grid">
+        <div class="test">
+          <p>"Terra’s visibility features transformed our operations — we could finally predict delays before they happened."</p>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+            <div style="width:44px;height:44px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#031026">A</div>
+            <div>
+              <div style="font-weight:700">Aria Chen</div>
+              <div class="muted" style="font-size:13px">Head of Logistics — NovaTech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test">
+          <p>"Implementation was seamless. Support and custom SLA options made the difference for our global roll-out."</p>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+            <div style="width:44px;height:44px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#031026">B</div>
+            <div>
+              <div style="font-weight:700">Bruno Silva</div>
+              <div class="muted" style="font-size:13px">Supply Chain Director — E-Mall</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test">
+          <p>"Their predictive ETAs and exception management reduced our customer inquiries by 40%."</p>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+            <div style="width:44px;height:44px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#031026">C</div>
+            <div>
+              <div style="font-weight:700">Camila Reyes</div>
+              <div class="muted" style="font-size:13px">Operations Lead — FreshDirect</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Talk to us</div>
+          <h2 style="margin:6px 0">Schedule a demo or request a custom quote</h2>
+          <div class="muted">Tell us about your network and we’ll prepare a tailored plan with expected ROI and timelines.</div>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <form class="form" onsubmit="event.preventDefault();alert('Demo request sent — placeholder');">
+            <label for="company">Company</label>
+            <input id="company" placeholder="Example: NovaTech" required />
+
+            <label for="email" style="margin-top:10px">Email</label>
+            <input id="email" type="email" placeholder="you@company.com" required />
+
+            <label for="message" style="margin-top:10px">Message</label>
+            <textarea id="message" rows="5" placeholder="Short description of your challenge"></textarea>
+
+            <div class="submit">
+              <button class="btn" type="submit">Request Demo</button>
+            </div>
+          </form>
+        </div>
+
+        <aside style="background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+          <div style="font-weight:700;margin-bottom:6px">Enterprise Partnerships</div>
+          <div class="muted">White glove onboarding • SLA-backed operations • Dedicated account teams</div>
+
+          <div style="margin-top:18px">
+            <div class="muted">Phone</div>
+            <div>+1 (555) 123-4567</div>
+            <div class="muted" style="margin-top:10px">Email</div>
+            <div>sales@terra-logistics.com</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+          <div class="brand-mark">T</div>
+          <div>
+            <div style="font-weight:700">Terra Logistics</div>
+            <div class="muted">Supply Chain & Logistics</div>
+          </div>
+        </div>
+        <div class="muted" style="max-width:48ch">© 2025 Terra Logistics — Building resilient supply chains for global enterprises.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:center">
+        <div class="muted">Privacy • Terms • Security</div>
+        <div style="margin-top:12px" class="muted">Follow us on LinkedIn</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
